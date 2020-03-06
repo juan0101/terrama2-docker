@@ -1,0 +1,147 @@
+version: "3"
+
+services:
+
+  # TerraMA2 Web Application
+  terrama2_webapp:
+    image: terrama2_node_8
+    container_name: terrama2_webapp
+    working_dir: /app/webapp
+    restart: always
+    ports:
+      - "127.0.0.1:36000:36000"
+      - 5858:5858
+    volumes:
+      - "data_vol:/data"
+      - "terrama2_shared_vol:/shared-data"
+      - ~/mydevel/terrama2/codebase/:/app/
+      - ~/mydevel/terrama2/build/cmake/:/terrama2/build/cmake
+      - ~/mydevel/terrama2/3rdparty/:/terrama2/3rdparty/
+      - ~/mydevel/terrama2/mylibs/:/terrama2/mylibs/
+      - ~/mydevel/terrama2/codebase/:/terrama2/codebase/
+      - ~/mydevel/terrama2/terralib/build/:/terrama2/terralib/build/
+      - ~/mydevel/terrama2/terralib/build/cmake:/terrama2/terralib/build/cmake
+      - ~/mydevel/terrama2/terralib/3rdparty/:/terrama2/terralib/3rdparty/
+      - ~/mydevel/terrama2/terralib/codebase/:/terrama2/terralib/codebase/
+    command: > 
+      bash -c "npm install && npm run dev"
+    networks:
+      - net
+
+  # TerraMA2 Web Monitor
+  terrama2_webmonitor:
+    image: terrama2_node_8
+    container_name: terrama2_webmonitor
+    working_dir: /app/webmonitor
+    restart: always
+    ports:
+      - "127.0.0.1:36001:36001"
+      - 5859:5858
+    depends_on:
+      - terrama2_webapp
+    volumes:
+      - "data_vol:/data"
+      - "terrama2_shared_vol:/shared-data"
+      - ~/mydevel/terrama2/codebase/:/app/
+      - ~/mydevel/terrama2/build/cmake/:/terrama2/build/cmake
+      - ~/mydevel/terrama2/3rdparty/:/terrama2/3rdparty/
+      - ~/mydevel/terrama2/mylibs/:/terrama2/mylibs/
+      - ~/mydevel/terrama2/codebase/:/terrama2/codebase/
+      - ~/mydevel/terrama2/terralib/build/:/terrama2/terralib/build/
+      - ~/mydevel/terrama2/terralib/build/cmake:/terrama2/terralib/build/cmake
+      - ~/mydevel/terrama2/terralib/3rdparty/:/terrama2/terralib/3rdparty/
+      - ~/mydevel/terrama2/terralib/codebase/:/terrama2/terralib/codebase/
+    command: > 
+      bash -c "npm install && npm run dev"
+    networks:
+      - net
+    links:
+      - terrama2_webapp
+
+  # TerraMA2 Report server
+  terrama2_report_server:
+    build:
+      context: .
+      dockerfile: report_server/Dockerfile
+    image: terrama2_report_server
+    working_dir: /app
+    container_name: terrama2_report_server
+    restart: "always"
+    environment:
+        - NODE_ENV=DEVELOPMENT
+    volumes:
+        - ~/mydevel/terrama2-report-server:/app
+    ports:
+        - "127.0.0.1:3200:3200"
+        - 5860:5858
+    command: > 
+        bash -c "npm install && npm run dev"
+    # entrypoint:
+    #     - npm
+    #     - run
+    #     - dev
+    networks:
+        - net
+
+  # TerraMA2 Report client
+  terrama2_report_client:
+    build: 
+      context: .
+      dockerfile: report_client/Dockerfile
+    image: terrama2_report_client
+    working_dir: /app
+    container_name: terrama2_report_client
+    restart: "always"
+    volumes:
+        - ~/mydevel/terrama2-report:/app
+    command: > 
+      bash -c "npm install && ng serve --host 0.0.0.0 --port 4200"
+    ports: 
+        - '4200:4200'
+        - 5861:5858
+    networks:
+        - net
+
+  # TerraMA2 DB
+  terrama2_pg:
+    image: mdillon/postgis
+    container_name: terrama2_pg
+    restart: always
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - terrama2_pg_vol:/var/lib/postgresql/data
+    environment: 
+      - "POSTGRES_PASSWORD=postgres"
+    networks:
+      - net
+
+  # TerraMA2 Geoserver
+  terrama2_geoserver:
+    image: terrama2/geoserver:2.11
+    container_name: terrama2_geoserver
+    restart: always
+    ports:
+      - "127.0.0.1:8080:8080"
+    volumes:
+      - terrama2_data_vol:/data
+      - terrama2_shared_vol:/shared-data
+      - terrama2_geoserver_vol:/opt/geoserver/data_dir
+      - ./conf/terrama2_geoserver_setenv.sh:/usr/local/tomcat/bin/setenv.sh
+    environment: 
+      - "GEOSERVER_URL=/geoserver"
+      - "GEOSERVER_DATA_DIR=/opt/geoserver/data_dir"
+    networks:
+      - net
+
+networks:
+  net:
+
+volumes:
+  data_vol:
+  terrama2_pg_vol:
+  terrama2_geoserver_vol:
+  terrama2_data_vol:
+  terrama2_shared_vol:
+    external:
+      name: terrama2_shared_vol
