@@ -102,27 +102,22 @@ cmake -G "CodeBlocks - Unix Makefiles" \
 
 make -j 4
 
-cp -a $TERRAMA_CODEBASE_PATH/webapp/config/db.json.example $TERRAMA_CODEBASE_PATH/webapp/config/db.json
-cp -a $TERRAMA_CODEBASE_PATH/webapp/config/settings.json.example $TERRAMA_CODEBASE_PATH/webapp/config/settings.json
-
-cp -r $TERRAMA_CODEBASE_PATH/webmonitor/config/sample_instances $TERRAMA_CODEBASE_PATH/webmonitor/config/instances
-
 echo "### Running npm install... ###"
 
 echo "### Webapp... ###"
 
-cd /terrama2/codebase/webapp
+cd $TERRAMA_CODEBASE_PATH/webapp
 npm install
 grunt
 
 echo "### Webcomponents... ###"
 
-cd /terrama2/codebase/webcomponents
+cd $TERRAMA_CODEBASE_PATH/webcomponents
 npm install
 grunt
 
 echo "### Webmonitor... ###"
 
-cd /terrama2/codebase/webmonitor
+cd $TERRAMA_CODEBASE_PATH/webmonitor
 npm install
 grunt

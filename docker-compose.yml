@@ -6,7 +6,7 @@ services:
   terrama2_webapp:
     image: terrama2_node_8
     container_name: terrama2_webapp
-    working_dir: /app/webapp
+    working_dir: /terrama2/codebase/webapp
     restart: always
     ports:
       - "127.0.0.1:36000:36000"
@@ -14,17 +14,18 @@ services:
     volumes:
       - "data_vol:/data"
       - "terrama2_shared_vol:/shared-data"
-      - ~/mydevel/terrama2/codebase/:/app/
-      - ~/mydevel/terrama2/build/cmake/:/terrama2/build/cmake
-      - ~/mydevel/terrama2/3rdparty/:/terrama2/3rdparty/
-      - ~/mydevel/terrama2/mylibs/:/terrama2/mylibs/
-      - ~/mydevel/terrama2/codebase/:/terrama2/codebase/
-      - ~/mydevel/terrama2/terralib/build/:/terrama2/terralib/build/
-      - ~/mydevel/terrama2/terralib/build/cmake:/terrama2/terralib/build/cmake
-      - ~/mydevel/terrama2/terralib/3rdparty/:/terrama2/terralib/3rdparty/
-      - ~/mydevel/terrama2/terralib/codebase/:/terrama2/terralib/codebase/
-    command: > 
-      bash -c "npm install && npm run dev"
+      # - ~/mydevel/terrama2/build/cmake/:/terrama2/build/cmake/
+      # - ~/mydevel/terrama2/3rdparty/:/terrama2/3rdparty/
+      # - ~/mydevel/terrama2/mylibs/:/terrama2/mylibs/
+      # - ~/mydevel/terrama2/codebase/:/terrama2/codebase/
+      # - ~/mydevel/terrama2/terralib/build/:/terrama2/terralib/build/
+      # - ~/mydevel/terrama2/terralib/build/cmake/:/terrama2/terralib/build/cmake/
+      # - ~/mydevel/terrama2/terralib/3rdparty/:/terrama2/terralib/3rdparty/
+      # - ~/mydevel/terrama2/terralib/codebase/:/terrama2/terralib/codebase/
+    entrypoint: 
+      - npm
+      - run
+      - dev
     networks:
       - net
 
@@ -32,7 +33,7 @@ services:
   terrama2_webmonitor:
     image: terrama2_node_8
     container_name: terrama2_webmonitor
-    working_dir: /app/webmonitor
+    working_dir: /terrama2/codebase/webmonitor
     restart: always
     ports:
       - "127.0.0.1:36001:36001"
@@ -42,17 +43,18 @@ services:
     volumes:
       - "data_vol:/data"
       - "terrama2_shared_vol:/shared-data"
-      - ~/mydevel/terrama2/codebase/:/app/
-      - ~/mydevel/terrama2/build/cmake/:/terrama2/build/cmake
-      - ~/mydevel/terrama2/3rdparty/:/terrama2/3rdparty/
-      - ~/mydevel/terrama2/mylibs/:/terrama2/mylibs/
-      - ~/mydevel/terrama2/codebase/:/terrama2/codebase/
-      - ~/mydevel/terrama2/terralib/build/:/terrama2/terralib/build/
-      - ~/mydevel/terrama2/terralib/build/cmake:/terrama2/terralib/build/cmake
-      - ~/mydevel/terrama2/terralib/3rdparty/:/terrama2/terralib/3rdparty/
-      - ~/mydevel/terrama2/terralib/codebase/:/terrama2/terralib/codebase/
-    command: > 
-      bash -c "npm install && npm run dev"
+      # - ~/mydevel/terrama2/build/cmake/:/terrama2/build/cmake/
+      # - ~/mydevel/terrama2/3rdparty/:/terrama2/3rdparty/
+      # - ~/mydevel/terrama2/mylibs/:/terrama2/mylibs/
+      # - ~/mydevel/terrama2/codebase/:/terrama2/codebase/
+      # - ~/mydevel/terrama2/terralib/build/:/terrama2/terralib/build/
+      # - ~/mydevel/terrama2/terralib/build/cmake/:/terrama2/terralib/build/cmake/
+      # - ~/mydevel/terrama2/terralib/3rdparty/:/terrama2/terralib/3rdparty/
+      # - ~/mydevel/terrama2/terralib/codebase/:/terrama2/terralib/codebase/
+    entrypoint: 
+      - npm
+      - run
+      - dev
     networks:
       - net
     links:
@@ -76,10 +78,6 @@ services:
         - 5860:5858
     command: > 
         bash -c "npm install && npm run dev"
-    # entrypoint:
-    #     - npm
-    #     - run
-    #     - dev
     networks:
         - net
 
