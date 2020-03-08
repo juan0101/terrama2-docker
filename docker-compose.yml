@@ -1,4 +1,4 @@
-version: "3"
+version: "3.7"
 
 services:
 
@@ -14,14 +14,6 @@ services:
     volumes:
       - "data_vol:/data"
       - "terrama2_shared_vol:/shared-data"
-      # - ~/mydevel/terrama2/build/cmake/:/terrama2/build/cmake/
-      # - ~/mydevel/terrama2/3rdparty/:/terrama2/3rdparty/
-      # - ~/mydevel/terrama2/mylibs/:/terrama2/mylibs/
-      # - ~/mydevel/terrama2/codebase/:/terrama2/codebase/
-      # - ~/mydevel/terrama2/terralib/build/:/terrama2/terralib/build/
-      # - ~/mydevel/terrama2/terralib/build/cmake/:/terrama2/terralib/build/cmake/
-      # - ~/mydevel/terrama2/terralib/3rdparty/:/terrama2/terralib/3rdparty/
-      # - ~/mydevel/terrama2/terralib/codebase/:/terrama2/terralib/codebase/
     entrypoint: 
       - npm
       - run
@@ -43,14 +35,6 @@ services:
     volumes:
       - "data_vol:/data"
       - "terrama2_shared_vol:/shared-data"
-      # - ~/mydevel/terrama2/build/cmake/:/terrama2/build/cmake/
-      # - ~/mydevel/terrama2/3rdparty/:/terrama2/3rdparty/
-      # - ~/mydevel/terrama2/mylibs/:/terrama2/mylibs/
-      # - ~/mydevel/terrama2/codebase/:/terrama2/codebase/
-      # - ~/mydevel/terrama2/terralib/build/:/terrama2/terralib/build/
-      # - ~/mydevel/terrama2/terralib/build/cmake/:/terrama2/terralib/build/cmake/
-      # - ~/mydevel/terrama2/terralib/3rdparty/:/terrama2/terralib/3rdparty/
-      # - ~/mydevel/terrama2/terralib/codebase/:/terrama2/terralib/codebase/
     entrypoint: 
       - npm
       - run
