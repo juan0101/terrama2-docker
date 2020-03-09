@@ -4,6 +4,7 @@ echo "Installing packages..."
 
 apt-get update
 
+apt-get install -y software-properties-common
 add-apt-repository -y ppa:apt-fast/stable
 apt-get update
 apt-get install -y apt-fast
@@ -16,7 +17,7 @@ pip install psycopg2
 
 curl -sL https://deb.nodesource.com/setup_8.x | bash -
 
-apt-get install -y nodejs
+apt-fast install -y nodejs
 
 export PATH=$PATH:/usr/lib/node_modules/npm/bin
 
