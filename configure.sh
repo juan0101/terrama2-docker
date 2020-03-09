@@ -2,7 +2,11 @@
 
 sudo apt-get update
 
-sudo apt-get install git apt-transport-https ca-certificates curl gnupg-agent software-properties-common git
+sudo add-apt-repository -y ppa:apt-fast/stable
+sudo apt-get update
+sudo apt-get install -y apt-fast
+
+sudo apt-fast install git apt-transport-https ca-certificates curl gnupg-agent software-properties-common git
 
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
