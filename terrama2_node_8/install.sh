@@ -4,9 +4,9 @@ echo "Installing packages..."
 
 apt-get update
 
-sudo add-apt-repository -y ppa:apt-fast/stable
-sudo apt-get update
-sudo apt-get install -y apt-fast
+add-apt-repository -y ppa:apt-fast/stable
+apt-get update
+apt-get install -y apt-fast
 
 apt-fast install -y qtcreator curl unzip locales supervisor wget libcurl3-dev libpython2.7-dev libproj-dev libgeos++-dev libssl-dev \
 libxerces-c-dev screen doxygen graphviz gnutls-bin gsasl libgsasl7 libghc-gsasl-dev libgnutls-dev zlib1g-dev \
