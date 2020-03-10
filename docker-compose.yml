@@ -6,18 +6,20 @@ services:
   terrama2_webapp:
     image: terrama2_node_8
     container_name: terrama2_webapp
-    working_dir: /terrama2/codebase/webapp
+    working_dir: /opt/terrama2/codebase/webapp/
     restart: always
     ports:
       - "127.0.0.1:36000:36000"
       - 5858:5858
+    environment: 
+      - "DISPLAY=$DISPLAY"
     volumes:
       - "data_vol:/data"
       - "terrama2_shared_vol:/shared-data"
-    entrypoint: 
-      - npm
-      - run
-      - dev
+      - ~/mydevel/terrama2/:/opt/terrama2/
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    command: > 
+      bash -c "npm install && grunt && npm run dev"
     networks:
       - net
 
@@ -25,7 +27,7 @@ services:
   terrama2_webmonitor:
     image: terrama2_node_8
     container_name: terrama2_webmonitor
-    working_dir: /terrama2/codebase/webmonitor
+    working_dir: /opt/terrama2/codebase/webmonitor/
     restart: always
     ports:
       - "127.0.0.1:36001:36001"
@@ -35,10 +37,9 @@ services:
     volumes:
       - "data_vol:/data"
       - "terrama2_shared_vol:/shared-data"
-    entrypoint: 
-      - npm
-      - run
-      - dev
+      - ~/mydevel/terrama2/:/opt/terrama2/
+    command: > 
+      bash -c "cd /opt/terrama2/codebase/webcomponents/ && npm install && grunt && cd /opt/terrama2/codebase/webmonitor/ && npm install && npm run dev"
     networks:
       - net
     links:

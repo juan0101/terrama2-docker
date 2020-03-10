@@ -4,9 +4,9 @@
 
 export const environment = {
   production: false,
-  terramaUrl: 'http://terrama.mpmt.mp.br/mpmt/adm',
-  reportServerUrl: 'http://terrama.mpmt.mp.br/mpmt/alertaServer',
-  geoserverUrl: 'http://terrama.mpmt.mp.br/mpmt/geoserver',
+  terramaUrl: 'http://localhost:36000/adm',
+  reportServerUrl: 'http://localhost:3200/alertaServer',
+  geoserverUrl: 'http://localhost:8080/geoserver',
 };
 
 /*
