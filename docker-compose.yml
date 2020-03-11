@@ -39,7 +39,7 @@ services:
       - "terrama2_shared_vol:/shared-data"
       - ~/mydevel/terrama2/:/opt/terrama2/
     command: > 
-      bash -c "cd /opt/terrama2/codebase/webcomponents/ && npm install && grunt && cd /opt/terrama2/codebase/webmonitor/ && npm install && npm run dev"
+      bash -c "cd /opt/terrama2/codebase/webcomponents/ && npm install && grunt && cd /opt/terrama2/codebase/webmonitor/ && npm install && grunt && npm run dev"
     networks:
       - net
     links:

@@ -1,7 +1,5 @@
 #!/bin/bash
 
-echo "Installing packages..."
-
 apt-get update
 
 apt-get install -y software-properties-common
@@ -24,3 +22,7 @@ export PATH=$PATH:/usr/lib/node_modules/npm/bin
 npm install -g grunt-cli
 
 export PATH=$PATH:/usr/lib/node_modules/grunt-cli/bin
+
+rm -rf /var/lib/apt/lists/*
+
+xhost +local:docker

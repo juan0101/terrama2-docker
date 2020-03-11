@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  terramaUrl: 'http://localhost:36000/adm',
-  reportServerUrl: 'http://localhost:3200/alertaServer',
+  terramaUrl: 'http://localhost:36000',
+  reportServerUrl: 'http://localhost:3200',
   geoserverUrl: 'http://localhost:8080/geoserver',
 };
 

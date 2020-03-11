@@ -1,12 +1,19 @@
 #!/bin/bash
 
-sudo apt-get update
+echo "***************************"
+echo "* 	 Installing packages	  *"
+echo "***************************"
+echo ""
 
 sudo add-apt-repository -y ppa:apt-fast/stable
 sudo apt-get update
 sudo apt-get install -y apt-fast
 
-sudo apt-fast install apt-transport-https ca-certificates curl gnupg-agent software-properties-common git
+sudo apt-fast install apt-transport-https ca-certificates curl gnupg-agent software-properties-common 
+
+curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
+sudo install -o root -g root -m 644 microsoft.gpg /etc/apt/trusted.gpg.d/
+sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list'
 
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
@@ -17,7 +24,7 @@ sudo add-apt-repository \
 
 sudo apt-fast update
 
-sudo apt-fast install docker-ce docker-ce-cli containerd.io
+sudo apt-fast install docker-ce docker-ce-cli containerd.io git code
 
 sudo usermod -aG docker $USER
 
@@ -28,6 +35,11 @@ sudo chmod +x /usr/local/bin/docker-compose
 sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
 mkdir ~/mydevel
+
+echo "***************************"
+echo "* 	  Cloning projects	  *"
+echo "***************************"
+echo ""
 
 git clone -b b4.1.0 -o upstream https://github.com/TerraMA2/terrama2.git ~/mydevel/terrama2/codebase
 GIT_SSL_NO_VERIFY=false git clone -o upstream -b 5.4.5 https://gitlab.dpi.inpe.br/terralib/terralib.git ~/mydevel/terrama2/terralib/codebase
@@ -56,20 +68,30 @@ sudo chmod +x terrama2_node_8/build.sh
 sudo chmod +x scripts/npm-install.sh
 sudo chmod +x scripts/grunt.sh
 
+echo "****************************"
+echo "* 	    Building image 	   *"
+echo "****************************"
+echo ""
+
 cd terrama2_node_8/
 
 docker build -t terrama2_node_8 .
 
 cd ..
 
+echo "******************************"
+echo "* 	 Running docker compose   *"
+echo "******************************"
+echo ""
+
 docker-compose -p terrama2 up -d
 
-cd scripts
+# cd scripts
 
-./npm-install.sh
-./grunt.sh
+# ./npm-install.sh
+# ./grunt.sh
 
-cd ..
+# cd ..
 
 docker exec -it terrama2_webapp /build.sh
 

@@ -1,6 +1,9 @@
 #!/bin/bash
 
-echo "Installing CMake..."
+echo "****************************"
+echo "* 	Installing CMake	 *"
+echo "****************************"
+echo ""
 
 cd /
 
@@ -10,7 +13,10 @@ chmod +x cmake-3.11.4-Linux-x86_64.sh
 
 ./cmake-3.11.4-Linux-x86_64.sh --skip-license --exclude-subdir --prefix=/usr/local
 
-echo "Compiling projects..."
+echo "*******************************"
+echo "* 	Compiling projects 		*"
+echo "*******************************"
+echo ""
 
 TERRAMA_BUILD_PATH="/opt/terrama2/build"
 TERRAMA_3RD_PARTY_PATH="/opt/terrama2/3rdparty"
@@ -30,7 +36,10 @@ mkdir -p $TERRALIB_BUILD_PATH
 mkdir -p $TERRALIB_3RD_PARTY_PATH
 mkdir -p $TERRALIB_CODEBASE_PATH
 
-echo -e "Terralib"
+echo "********************"
+echo "*		TerraLib	 *"
+echo "********************"
+echo ""
 
 cd $TERRALIB_3RD_PARTY_PATH
 
@@ -47,14 +56,15 @@ cmake -G "CodeBlocks - Unix Makefiles" \
 
 make -j $(($(nproc)-1))
 
-echo -e "TerraMA"
+echo "********************"
+echo "*		TerraMA²	 *"
+echo "********************"
+echo ""
 
 cd $TERRAMA_3RD_PARTY_PATH
 
 wget -c http://www.dpi.inpe.br/jenkins-data/terradocs/terrama2-3rdparty.zip
 unzip terrama2-3rdparty.zip -d $TERRAMA_3RD_PARTY_PATH
-
-echo "Installing packages..."
 
 cd $TERRAMA_BUILD_PATH
 
