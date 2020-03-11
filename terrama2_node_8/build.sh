@@ -1,8 +1,8 @@
 #!/bin/bash
 
-echo "****************************"
-echo "* 	Installing CMake	 *"
-echo "****************************"
+echo "********************"
+echo "* Installing CMake *"
+echo "********************"
 echo ""
 
 cd /
@@ -13,9 +13,9 @@ chmod +x cmake-3.11.4-Linux-x86_64.sh
 
 ./cmake-3.11.4-Linux-x86_64.sh --skip-license --exclude-subdir --prefix=/usr/local
 
-echo "*******************************"
-echo "* 	Compiling projects 		*"
-echo "*******************************"
+echo "**********************"
+echo "* Compiling projects *"
+echo "**********************"
 echo ""
 
 TERRAMA_BUILD_PATH="/opt/terrama2/build"
@@ -36,9 +36,9 @@ mkdir -p $TERRALIB_BUILD_PATH
 mkdir -p $TERRALIB_3RD_PARTY_PATH
 mkdir -p $TERRALIB_CODEBASE_PATH
 
-echo "********************"
-echo "*		TerraLib	 *"
-echo "********************"
+echo "************"
+echo "* TerraLib *"
+echo "************"
 echo ""
 
 cd $TERRALIB_3RD_PARTY_PATH
@@ -56,9 +56,9 @@ cmake -G "CodeBlocks - Unix Makefiles" \
 
 make -j $(($(nproc)-1))
 
-echo "********************"
-echo "*		TerraMA²	 *"
-echo "********************"
+echo "************"
+echo "* TerraMA² *"
+echo "************"
 echo ""
 
 cd $TERRAMA_3RD_PARTY_PATH

@@ -1,8 +1,8 @@
 #!/bin/bash
 
-echo "***************************"
-echo "* 	 Installing packages	  *"
-echo "***************************"
+echo "***********************"
+echo "* Installing packages *"
+echo "***********************"
 echo ""
 
 sudo add-apt-repository -y ppa:apt-fast/stable
@@ -18,9 +18,9 @@ sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode s
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
 sudo add-apt-repository \
-   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-   $(lsb_release -cs) \
-   stable"
+    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+    $(lsb_release -cs) \
+    stable"
 
 sudo apt-fast update
 
@@ -36,9 +36,9 @@ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
 mkdir ~/mydevel
 
-echo "***************************"
-echo "* 	  Cloning projects	  *"
-echo "***************************"
+echo "********************"
+echo "* Cloning projects *"
+echo "********************"
 echo ""
 
 git clone -b b4.1.0 -o upstream https://github.com/TerraMA2/terrama2.git ~/mydevel/terrama2/codebase
@@ -68,9 +68,9 @@ sudo chmod +x terrama2_node_8/build.sh
 sudo chmod +x scripts/npm-install.sh
 sudo chmod +x scripts/grunt.sh
 
-echo "****************************"
-echo "* 	    Building image 	   *"
-echo "****************************"
+echo "******************"
+echo "* Building image *"
+echo "******************"
 echo ""
 
 cd terrama2_node_8/
@@ -79,9 +79,9 @@ docker build -t terrama2_node_8 .
 
 cd ..
 
-echo "******************************"
-echo "* 	 Running docker compose   *"
-echo "******************************"
+echo "**************************"
+echo "* Running docker compose *"
+echo "**************************"
 echo ""
 
 docker-compose -p terrama2 up -d
@@ -95,10 +95,42 @@ docker-compose -p terrama2 up -d
 
 docker exec -it terrama2_webapp /build.sh
 
-sudo chmod 755 -R ~/mydevel
 sudo chown $USER:$USER -R ~/mydevel
 
 echo -e '
 127.0.0.1       terrama2_geoserver
 127.0.0.1       terrama2_webapp
 127.0.0.1       terrama2_webmonitor' | sudo tee -a /etc/hosts > /dev/null
+
+mkdir ~/mydevel/terrama2/codebase/.vscode
+touch ~/mydevel/terrama2/codebase/.vscode/launch.json
+echo -e "
+{
+    \"version\": \"0.2.0\",
+    \"configurations\": [
+        {
+            \"name\": \"Admin\",
+            \"address\": \"0.0.0.0\",
+            \"type\": \"node\",
+            \"request\": \"attach\",
+            \"localRoot\": \"${workspaceFolder}/webapp\",
+            \"remoteRoot\": \"/opt/terrama2/codebase/webapp\",
+            \"port\": 5858,
+            \"restart\": true,
+            \"sourceMaps\": false,
+            \"protocol\": \"inspector\"
+        },
+        {
+            \"name\": \"Monitor\",
+            \"address\": \"localhost\",
+            \"type\": \"node\",
+            \"request\": \"attach\",
+            \"localRoot\": \"${workspaceFolder}/webmonitor\",
+            \"remoteRoot\": \"/opt/terrama2/codebase/webmonitor\",
+            \"port\": 5859,
+            \"restart\": false,
+            \"sourceMaps\": false,
+            \"protocol\": \"inspector\"
+        }
+    ]
+}" > ~/mydevel/terrama2/codebase/.vscode/launch.json
