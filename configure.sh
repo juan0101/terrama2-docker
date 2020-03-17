@@ -97,6 +97,8 @@ docker exec -it terrama2_webapp /build.sh
 
 sudo chown $USER:$USER -R ~/mydevel
 
+xhost +local:docker
+
 echo -e '
 127.0.0.1       terrama2_geoserver
 127.0.0.1       terrama2_webapp
