@@ -54,7 +54,7 @@ cp -a report_client/environment.prod.ts ~/mydevel/terrama2-report/src/environmen
 cp -a report_server/config/config.json ~/mydevel/terrama2-report-server/config/config.json
 cp -a report_server/geoserver-conf/config.json ~/mydevel/terrama2-report-server/geoserver-conf/config.json
 
-cp -r webmonitor/instances/ ~/mydevel/terrama2/codebase/webmonitor/config/instances/
+cp -r webmonitor/instances/ ~/mydevel/terrama2/codebase/webmonitor/config/
 
 cp -a webapp/db.json ~/mydevel/terrama2/codebase/webapp/config/db.json
 cp -a webapp/settings.json ~/mydevel/terrama2/codebase/webapp/config/settings.json
@@ -89,7 +89,9 @@ docker-compose -p terrama2 up -d
 
 docker exec -it terrama2_webapp /build.sh
 
-sudo chown $USER:$USER -R ~/mydevel
+sudo chown $USER:$USER -R ~/mydevel/3rdparty
+sudo chown $USER:$USER -R ~/mydevel/build
+sudo chown $USER:$USER -R ~/mydevel/mylibs
 
 xhost +local:docker
 
