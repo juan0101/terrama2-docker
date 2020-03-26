@@ -54,20 +54,19 @@ cp -a report_client/environment.prod.ts ~/mydevel/terrama2-report/src/environmen
 cp -a report_server/config/config.json ~/mydevel/terrama2-report-server/config/config.json
 cp -a report_server/geoserver-conf/config.json ~/mydevel/terrama2-report-server/geoserver-conf/config.json
 
-cp -r webmonitor/instances/ ~/mydevel/terrama2/codebase/webmonitor/config/
+cp -r terrama2/webmonitor/instances/ ~/mydevel/terrama2/codebase/webmonitor/config/
 
-cp -a webapp/db.json ~/mydevel/terrama2/codebase/webapp/config/db.json
-cp -a webapp/settings.json ~/mydevel/terrama2/codebase/webapp/config/settings.json
+cp -a terrama2/webapp/db.json ~/mydevel/terrama2/codebase/webapp/config/db.json
+cp -a terrama2/webapp/settings.json ~/mydevel/terrama2/codebase/webapp/config/settings.json
 
 cp -a terrama2/version.json ~/mydevel/terrama2/codebase/share/terrama2/version.json
-
-docker volume create terrama2_shared_vol
 
 sudo chmod +x terrama2_node_8/install.sh
 sudo chmod +x terrama2_node_8/build.sh
 
 sudo chmod +x scripts/npm-install.sh
 sudo chmod +x scripts/grunt.sh
+sudo chmod +x scripts/qtcreator.sh
 
 echo "******************"
 echo "* Building image *"
@@ -76,7 +75,7 @@ echo ""
 
 cd terrama2_node_8/
 
-docker build -t terrama2_node_8 .
+docker build -t terrama2-ubuntu-16-04 .
 
 cd ..
 
@@ -89,9 +88,18 @@ docker-compose -p terrama2 up -d
 
 docker exec -it terrama2_webapp /build.sh
 
-sudo chown $USER:$USER -R ~/mydevel/3rdparty
-sudo chown $USER:$USER -R ~/mydevel/build
-sudo chown $USER:$USER -R ~/mydevel/mylibs
+sudo chown $USER:$USER -R ~/mydevel/terrama2/3rdparty
+sudo chmod 755 -R ~/mydevel/terrama2/3rdparty
+sudo chown $USER:$USER -R ~/mydevel/terrama2/build
+sudo chmod 755 -R ~/mydevel/terrama2/build
+sudo chown $USER:$USER -R ~/mydevel/terrama2/mylibs
+sudo chmod 755 -R ~/mydevel/terrama2/mylibs
+sudo chown $USER:$USER -R ~/mydevel/geoserverDir
+sudo chmod 755 -R ~/mydevel/terrama2/geoserverDir
+sudo chown $USER:$USER -R ~/mydevel/sharedData
+sudo chmod 755 -R ~/mydevel/terrama2/sharedData
+
+sudo chmod 755 -R ~/mydevel/postgresqlData
 
 xhost +local:docker
 
