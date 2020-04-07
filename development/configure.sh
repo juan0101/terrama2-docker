@@ -48,11 +48,11 @@ GIT_SSL_NO_VERIFY=false git clone -o upstream -b 5.4.5 https://gitlab.dpi.inpe.b
 git clone -b b1.0.0 -o upstream https://github.com/TerraMA2/terrama2-report.git ~/mydevel/terrama2-report
 git clone -b b1.0.0 -o upstream https://github.com/TerraMA2/terrama2-report-server.git ~/mydevel/terrama2-report-server
 
-cp -a report_client/environment.ts ~/mydevel/terrama2-report/src/environments/environment.ts
-cp -a report_client/environment.prod.ts ~/mydevel/terrama2-report/src/environments/environment.prod.ts
+cp -a report/report_client/environment.ts ~/mydevel/terrama2-report/src/environments/environment.ts
+cp -a report/report_client/environment.prod.ts ~/mydevel/terrama2-report/src/environments/environment.prod.ts
 
-cp -a report_server/config/config.json ~/mydevel/terrama2-report-server/config/config.json
-cp -a report_server/geoserver-conf/config.json ~/mydevel/terrama2-report-server/geoserver-conf/config.json
+cp -a report/report_server/config/config.json ~/mydevel/terrama2-report-server/config/config.json
+cp -a report/report_server/geoserver-conf/config.json ~/mydevel/terrama2-report-server/geoserver-conf/config.json
 
 cp -r terrama2/webmonitor/instances/ ~/mydevel/terrama2/codebase/webmonitor/config/
 
@@ -61,8 +61,8 @@ cp -a terrama2/webapp/settings.json ~/mydevel/terrama2/codebase/webapp/config/se
 
 cp -a terrama2/version.json ~/mydevel/terrama2/codebase/share/terrama2/version.json
 
-sudo chmod +x terrama2_node_8/install.sh
-sudo chmod +x terrama2_node_8/build.sh
+sudo chmod +x terrama2-ubuntu-16-04/install.sh
+sudo chmod +x terrama2-ubuntu-16-04/build.sh
 
 sudo chmod +x scripts/npm-install.sh
 sudo chmod +x scripts/grunt.sh
@@ -73,9 +73,9 @@ echo "* Building image *"
 echo "******************"
 echo ""
 
-cd terrama2_node_8/
+cd terrama2-ubuntu-16-04/
 
-docker build -t terrama2-ubuntu-16-04 .
+docker build -t marcelopilatti/terrama2-ubuntu-16-04:1.0 .
 
 cd ..
 
@@ -84,9 +84,9 @@ echo "* Running docker compose *"
 echo "**************************"
 echo ""
 
-docker-compose -p terrama2 up -d
+docker-compose -p terrama2_dev up -d
 
-docker exec -it terrama2_webapp /build.sh
+# docker exec -it terrama2_webapp /build.sh
 
 sudo chown $USER:$USER -R ~/mydevel/terrama2/3rdparty
 sudo chmod 755 -R ~/mydevel/terrama2/3rdparty
@@ -95,9 +95,9 @@ sudo chmod 755 -R ~/mydevel/terrama2/build
 sudo chown $USER:$USER -R ~/mydevel/terrama2/mylibs
 sudo chmod 755 -R ~/mydevel/terrama2/mylibs
 sudo chown $USER:$USER -R ~/mydevel/geoserverDir
-sudo chmod 755 -R ~/mydevel/terrama2/geoserverDir
+sudo chmod 755 -R ~/mydevel/geoserverDir
 sudo chown $USER:$USER -R ~/mydevel/sharedData
-sudo chmod 755 -R ~/mydevel/terrama2/sharedData
+sudo chmod 755 -R ~/mydevel/sharedData
 
 sudo chmod 755 -R ~/mydevel/postgresqlData
 

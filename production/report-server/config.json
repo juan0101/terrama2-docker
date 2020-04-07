@@ -1,0 +1,38 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "postgres",
+    "database": "terrama2",
+    "host": "terrama2_pg",
+    "port": 5432,
+    "dialect": "postgres",
+    "define": {
+      "schema": "alertas"
+    },
+    "basePath": "/mpmt/alertaServer"  
+  },
+  "test": {
+    "username": "postgres",
+    "password": "postgres",
+    "database": "terrama-test",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "port": 5432,
+    "define": {
+      "schema": "terrama2"
+    }
+  },
+  "production": {
+    "username": "postgres",
+    "password": "postgres",
+    "database": "terrama2",
+    "host": "terrama2_pg",
+    "port": 5432,
+    "dialect": "postgres",
+    "define": {
+      "schema": "alertas"
+    },
+    "basePath": "/mpmt/alertaServer"
+  }
+}
+
