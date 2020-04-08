@@ -3,7 +3,7 @@
       "username": "postgres",
       "password": "postgres",
       "database": "terrama2",
-      "host": "terrama2_pg",
+      "host": "terrama2_pg_dev",
       "port": 5432,
       "dialect": "postgres",
       "define": {
@@ -17,7 +17,7 @@
       "username": "postgres",
       "password": "postgres",
       "database": "terrama2",
-      "host": "terrama2_pg",
+      "host": "terrama2_pg_dev",
       "port": 5432,
       "dialect": "postgres",
       "define": {

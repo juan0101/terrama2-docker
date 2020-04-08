@@ -5,9 +5,6 @@ __pycache__/
 
 # Generated files
 conf/terrama2_webapp_settings.json
-terrama2/Dockerfile
-webapp/Dockerfile
-webmonitor/Dockerfile
 
 # C extensions
 *.so

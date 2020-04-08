@@ -1,0 +1,95 @@
+##########################################################################
+#
+# WebApp
+#
+##########################################################################
+
+location %%TERRAMA2_PREFIX%%/adm {
+  proxy_pass http://127.0.0.1:36018;
+  include proxy_params;
+}
+
+location %%TERRAMA2_PREFIX%%/adm/socket.io {
+  proxy_pass http://127.0.0.1:36018;
+  include proxy_params;
+
+  # Path rewriting
+  rewrite ^%%TERRAMA2_PREFIX%%/adm/socket.io/?(.*) /socket.io/$1 break;
+}
+
+location %%TERRAMA2_PREFIX%%/adm/i18n {
+  proxy_pass http://127.0.0.1:36018;
+  include proxy_params;
+
+  # Path rewriting
+  rewrite ^%%TERRAMA2_PREFIX%%/adm/i18n/?(.*) /i18n/$1 break;
+}
+
+
+##########################################################################
+#
+# WebMonitor
+#
+##########################################################################
+
+location %%TERRAMA2_PREFIX%%/monitor {
+  proxy_pass http://127.0.0.1:36019;
+  include proxy_params;
+}
+
+location %%TERRAMA2_PREFIX%%/monitor/socket.io {
+  proxy_pass http://127.0.0.1:36019; 
+  include proxy_params;
+
+  # Path rewriting
+  rewrite ^%%TERRAMA2_PREFIX%%/monitor/socket.io/?(.*) /socket.io/$1 break;
+}
+
+location %%TERRAMA2_PREFIX%%/monitor/i18n {
+  proxy_pass http://127.0.0.1:36019;
+  include proxy_params;
+
+  # Path rewriting
+  rewrite ^%%TERRAMA2_PREFIX%%/monitor/i18n/?(.*) /i18n/$1 break;
+}
+
+
+##########################################################################
+#
+# GeoServer
+#
+##########################################################################
+
+location %%TERRAMA2_PREFIX%%/geoserver {
+  proxy_pass http://127.0.0.1:8082%%TERRAMA2_PREFIX%%/geoserver;
+  include proxy_params;
+
+  add_header Access-Control-Allow-Origin *;
+}
+
+
+location %%TERRAMA2_PREFIX%%/situacao_atual/ {
+  root /data/http/;
+
+#  rewrite ^%%TERRAMA2_PREFIX%%/?(.*) /$1 break;
+
+  index index.html;
+}
+
+##########################################################################
+#
+# Relatorio
+#
+##########################################################################
+
+location %%TERRAMA2_PREFIX%%/alertaServer {
+  proxy_pass http://127.0.0.1:36027;
+
+  include proxy_params;
+}
+
+location %%TERRAMA2_PREFIX%%/alerta/ {
+  proxy_pass http://127.0.0.1:36028;
+
+  include proxy_params;
+}

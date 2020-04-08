@@ -1,0 +1,40 @@
+version: '3.1'
+
+networks:
+  terrama2_net:
+    external:
+      name: "terrama2_net"
+
+services:
+
+ report-server:
+  build:
+    context: .
+    dockerfile: report-server/Dockerfile
+  image: terrama2/report-server:1.0.0
+  container_name: report-server
+  restart: "always"
+  environment:
+      - NODE_ENV=production
+  volumes:
+      - ./report-server/data:/data
+      - ./report-server/config.json:/app/config/config.json
+      - ./report-server/geoserver-conf/config.json:/app/geoserver-conf/config.json
+  ports:
+      - "36027:3200"
+  networks:
+      - terrama2_net
+
+ report-client:
+  build:
+    context: .
+    dockerfile: report-client/Dockerfile
+  image: terrama2/report-client:1.0.0
+  container_name: report-client
+  restart: "always"
+  volumes:
+      - ./report-client/data:/data
+  ports:
+      - "36028:80"
+  networks:
+      - terrama2_net

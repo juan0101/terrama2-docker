@@ -59,6 +59,8 @@ cp -r terrama2/webmonitor/instances/ ~/mydevel/terrama2/codebase/webmonitor/conf
 cp -a terrama2/webapp/db.json ~/mydevel/terrama2/codebase/webapp/config/db.json
 cp -a terrama2/webapp/settings.json ~/mydevel/terrama2/codebase/webapp/config/settings.json
 
+sudo rm -f ~/mydevel/terrama2/codebase/share/terrama2/version.json
+
 cp -a terrama2/version.json ~/mydevel/terrama2/codebase/share/terrama2/version.json
 
 sudo chmod +x terrama2-ubuntu-16-04/install.sh
@@ -86,8 +88,6 @@ echo ""
 
 docker-compose -p terrama2_dev up -d
 
-# docker exec -it terrama2_webapp /build.sh
-
 sudo chown $USER:$USER -R ~/mydevel/terrama2/3rdparty
 sudo chmod 755 -R ~/mydevel/terrama2/3rdparty
 sudo chown $USER:$USER -R ~/mydevel/terrama2/build
@@ -107,36 +107,3 @@ echo -e '
 127.0.0.1       terrama2_geoserver
 127.0.0.1       terrama2_webapp
 127.0.0.1       terrama2_webmonitor' | sudo tee -a /etc/hosts > /dev/null
-
-mkdir ~/mydevel/terrama2/codebase/.vscode
-touch ~/mydevel/terrama2/codebase/.vscode/launch.json
-echo -e "
-{
-    \"version\": \"0.2.0\",
-    \"configurations\": [
-        {
-            \"name\": \"Admin\",
-            \"address\": \"0.0.0.0\",
-            \"type\": \"node\",
-            \"request\": \"attach\",
-            \"localRoot\": \"${workspaceFolder}/webapp\",
-            \"remoteRoot\": \"/opt/terrama2/codebase/webapp\",
-            \"port\": 5858,
-            \"restart\": true,
-            \"sourceMaps\": false,
-            \"protocol\": \"inspector\"
-        },
-        {
-            \"name\": \"Monitor\",
-            \"address\": \"localhost\",
-            \"type\": \"node\",
-            \"request\": \"attach\",
-            \"localRoot\": \"${workspaceFolder}/webmonitor\",
-            \"remoteRoot\": \"/opt/terrama2/codebase/webmonitor\",
-            \"port\": 5859,
-            \"restart\": false,
-            \"sourceMaps\": false,
-            \"protocol\": \"inspector\"
-        }
-    ]
-}" > ~/mydevel/terrama2/codebase/.vscode/launch.json
