@@ -9,6 +9,9 @@ eval $(egrep -v '^#' .env | xargs)
 for image in conf/terrama2_webapp_settings.json.in \
              nginx-config/sites-available/terrama2-default.in \
              nginx-config/terrama2/terrama2.conf.in \
+             report/report-server/config.json.in \
+             report/report-client/config/environment.prod.ts.in \
+             report/report-server/geoserver-conf/config.json.in \
              postgres/postgresql.conf.in; do
   sed -r \
         -e 's!%%TERRAMA2_TAG%%!'"${TERRAMA2_TAG}"'!g' \

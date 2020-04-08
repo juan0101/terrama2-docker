@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   terramaUrl: 'http://localhost:36000',
-  reportServerUrl: 'http://localhost:3200'
+  reportServerUrl: 'http://localhost:3200',
+  geoserverUrl: 'http://localhost:8080/geoserver',
 };
 
 /*
@@ -16,4 +17,3 @@ export const environment = {
  * on performance if an error is thrown.
  */
 // import 'zone.js/dist/zone-error';  // Included with Angular CLI.
-

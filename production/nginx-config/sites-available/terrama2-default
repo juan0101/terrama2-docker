@@ -1,7 +1,0 @@
-server {
-  server_name terrama2.dpi.inpe.br;
-  listen 80;
-
-  include /etc/nginx/terrama2/terrama2.conf;
-
-}

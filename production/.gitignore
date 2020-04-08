@@ -5,6 +5,12 @@ __pycache__/
 
 # Generated files
 conf/terrama2_webapp_settings.json
+report/report-server/geoserver-conf/config.json
+report/report-server/config.json
+report/report-client/config/environment.prod.ts
+postgres/postgresql.conf
+nginx-config/sites-available/terrama2-default
+nginx-config/terrama2/terrama2.conf
 
 # C extensions
 *.so
