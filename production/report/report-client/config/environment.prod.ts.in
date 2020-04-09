@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
-  terramaUrl: 'http://%%TERRAMA2_DNS%%%%TERRAMA2_PREFIX%%/adm',
-  reportServerUrl: 'http://%%TERRAMA2_DNS%%%%TERRAMA2_PREFIX%%/alertaServer',
-  geoserverUrl: 'http://%%TERRAMA2_DNS%%%%TERRAMA2_PREFIX%%/geoserver'
+  terramaUrl: 'http://%%TERRAMA2_DNS%%%%TERRAMA2_PREFIX%%adm',
+  reportServerUrl: 'http://%%TERRAMA2_DNS%%%%TERRAMA2_PREFIX%%alertaServer',
+  geoserverUrl: 'http://%%TERRAMA2_DNS%%%%TERRAMA2_PREFIX%%geoserver'
 };
 

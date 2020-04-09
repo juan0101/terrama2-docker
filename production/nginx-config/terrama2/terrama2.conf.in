@@ -4,25 +4,25 @@
 #
 ##########################################################################
 
-location %%TERRAMA2_PREFIX%%/adm {
+location %%TERRAMA2_PREFIX%%adm {
   proxy_pass http://127.0.0.1:36018;
   include proxy_params;
 }
 
-location %%TERRAMA2_PREFIX%%/adm/socket.io {
+location %%TERRAMA2_PREFIX%%adm/socket.io {
   proxy_pass http://127.0.0.1:36018;
   include proxy_params;
 
   # Path rewriting
-  rewrite ^%%TERRAMA2_PREFIX%%/adm/socket.io/?(.*) /socket.io/$1 break;
+  rewrite ^%%TERRAMA2_PREFIX%%adm/socket.io/?(.*) /socket.io/$1 break;
 }
 
-location %%TERRAMA2_PREFIX%%/adm/i18n {
+location %%TERRAMA2_PREFIX%%adm/i18n {
   proxy_pass http://127.0.0.1:36018;
   include proxy_params;
 
   # Path rewriting
-  rewrite ^%%TERRAMA2_PREFIX%%/adm/i18n/?(.*) /i18n/$1 break;
+  rewrite ^%%TERRAMA2_PREFIX%%adm/i18n/?(.*) /i18n/$1 break;
 }
 
 
@@ -32,25 +32,25 @@ location %%TERRAMA2_PREFIX%%/adm/i18n {
 #
 ##########################################################################
 
-location %%TERRAMA2_PREFIX%%/monitor {
+location %%TERRAMA2_PREFIX%%monitor {
   proxy_pass http://127.0.0.1:36019;
   include proxy_params;
 }
 
-location %%TERRAMA2_PREFIX%%/monitor/socket.io {
+location %%TERRAMA2_PREFIX%%monitor/socket.io {
   proxy_pass http://127.0.0.1:36019; 
   include proxy_params;
 
   # Path rewriting
-  rewrite ^%%TERRAMA2_PREFIX%%/monitor/socket.io/?(.*) /socket.io/$1 break;
+  rewrite ^%%TERRAMA2_PREFIX%%monitor/socket.io/?(.*) /socket.io/$1 break;
 }
 
-location %%TERRAMA2_PREFIX%%/monitor/i18n {
+location %%TERRAMA2_PREFIX%%monitor/i18n {
   proxy_pass http://127.0.0.1:36019;
   include proxy_params;
 
   # Path rewriting
-  rewrite ^%%TERRAMA2_PREFIX%%/monitor/i18n/?(.*) /i18n/$1 break;
+  rewrite ^%%TERRAMA2_PREFIX%%monitor/i18n/?(.*) /i18n/$1 break;
 }
 
 
@@ -68,7 +68,7 @@ location %%TERRAMA2_PREFIX%%/geoserver {
 }
 
 
-location %%TERRAMA2_PREFIX%%/situacao_atual/ {
+location %%TERRAMA2_PREFIX%%situacao_atual/ {
   root /data/http/;
 
 #  rewrite ^%%TERRAMA2_PREFIX%%/?(.*) /$1 break;
@@ -82,13 +82,13 @@ location %%TERRAMA2_PREFIX%%/situacao_atual/ {
 #
 ##########################################################################
 
-location %%TERRAMA2_PREFIX%%/alertaServer {
+location %%TERRAMA2_PREFIX%%alertaServer {
   proxy_pass http://127.0.0.1:36027;
 
   include proxy_params;
 }
 
-location %%TERRAMA2_PREFIX%%/alerta/ {
+location %%TERRAMA2_PREFIX%%alerta/ {
   proxy_pass http://127.0.0.1:36028;
 
   include proxy_params;

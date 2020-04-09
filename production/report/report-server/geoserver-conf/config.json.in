@@ -82,8 +82,8 @@
     "password": "geoserver",
     "workspace": "mpmt_alertas",
     "datastore": "mpmt_alertas_datastore",
-    "baseHost": "http://%%TERRAMA2_DNS%%%%TERRAMA2_PREFIX%%/geoserver",
-    "host": "http://%%TERRAMA2_DNS%%%%TERRAMA2_PREFIX%%/geoserver/rest/",
+    "baseHost": "http://%%TERRAMA2_DNS%%%%TERRAMA2_PREFIX%%geoserver",
+    "host": "http://%%TERRAMA2_DNS%%%%TERRAMA2_PREFIX%%geoserver/rest/",
     "mosaic": {
       "wmsStore": {
         "name": "MosaicSpot2008",
@@ -113,7 +113,7 @@
         "styles": []
       }
     },
-    "legendUrl": "http://%%TERRAMA2_DNS%%%%TERRAMA2_PREFIX%%/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&legend_options=forceLabels:on&LAYER="
+    "legendUrl": "http://%%TERRAMA2_DNS%%%%TERRAMA2_PREFIX%%geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=20&HEIGHT=20&legend_options=forceLabels:on&LAYER="
   }
 }
 
