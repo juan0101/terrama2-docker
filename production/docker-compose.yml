@@ -136,7 +136,7 @@ services:
       - geoserver_vol:/opt/geoserver/data_dir
       - ./conf/terrama2_geoserver_setenv.sh:/usr/local/tomcat/bin/setenv.sh
     environment:
-      - "GEOSERVER_URL=/geoserver"
+      - "GEOSERVER_URL=${TERRAMA2_PREFIX}geoserver"
       - "GEOSERVER_DATA_DIR=/opt/geoserver/data_dir"
     networks:
       - net
