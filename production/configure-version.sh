@@ -7,6 +7,9 @@
 eval $(egrep -v '^#' .env | xargs)
 
 for image in conf/terrama2_webapp_settings.json.in \
+             terrama2/Dockerfile.in \
+             webapp/Dockerfile.in \
+             webmonitor/Dockerfile.in \
              nginx-config/sites-available/terrama2-default.in \
              nginx-config/terrama2/terrama2.conf.in \
              report/report-server/config.json.in \
